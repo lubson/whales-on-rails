@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Jmeno:</strong>
+  <%= @ucastnik.jmeno %>
+</p>
+
+<p>
+  <strong>Prijmeni:</strong>
+  <%= @ucastnik.prijmeni %>
+</p>
+
+<p>
+  <strong>Narozen:</strong>
+  <%= @ucastnik.narozen %>
+</p>
+
+<p>
+  <strong>Pohlavi:</strong>
+  <%= @ucastnik.pohlavi %>
+</p>
+
+<%= link_to 'Edit', edit_ucastnik_path(@ucastnik) %> |
+<%= link_to 'Back', ucastniks_path %>

@@ -1,0 +1,33 @@
+<%= form_for(@ucastnik) do |f| %>
+  <% if @ucastnik.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ucastnik.errors.count, "error") %> prohibited this ucastnik from being saved:</h2>
+
+      <ul>
+      <% @ucastnik.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :jmeno %><br>
+    <%= f.text_field :jmeno %>
+  </div>
+  <div class="field">
+    <%= f.label :prijmeni %><br>
+    <%= f.text_field :prijmeni %>
+  </div>
+  <div class="field">
+    <%= f.label :narozen %><br>
+    <%= f.datetime_select :narozen %>
+  </div>
+  <div class="field">
+    <%= f.label :pohlavi %><br>
+    <%= f.number_field :pohlavi %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<h1>Listing ucastniks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Jmeno</th>
+      <th>Prijmeni</th>
+      <th>Narozen</th>
+      <th>Pohlavi</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ucastniks.each do |ucastnik| %>
+      <tr>
+        <td><%= ucastnik.jmeno %></td>
+        <td><%= ucastnik.prijmeni %></td>
+        <td><%= ucastnik.narozen %></td>
+        <td><%= ucastnik.pohlavi %></td>
+        <td><%= link_to 'Show', ucastnik %></td>
+        <td><%= link_to 'Edit', edit_ucastnik_path(ucastnik) %></td>
+        <td><%= link_to 'Destroy', ucastnik, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ucastnik', new_ucastnik_path %>
