@@ -1,70 +1,113 @@
-﻿using System;
+﻿using Model;
+using RestSharp;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model;
+using System.Configuration;
+using Newtonsoft.Json;
 using System.Net;
 using System.IO;
-using RestSharp;
-using System.Diagnostics;
-
 
 namespace DataLayer
 {
     public class UcastnikRepository
     {
-        public static Ucastnik GetById(int id) 
+        private string _resource = "ucastniks";
+        private string Resource
         {
-            //HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://domis-c9-lubson.c9.io/ucastniks"+".json");
-            //req.ContentType = "application/json; charset=utf-8";
-            //HttpWebResponse res = (HttpWebResponse)req.GetResponse();
-            //Stream resStream = res.GetResponseStream();
-            //var streamReader = new StreamReader(resStream);
-            //string content = streamReader.ReadToEnd();
-            //System.Console.WriteLine(content);
-            //return null;
+            get { return _resource; }
+            set { _resource = value; }
+        }
+        private IRestClient _client;
+        private IRestClient Client 
+        {
+            get { return _client; }
+            set { _client = value; }
+        }
 
-            var client = new RestClient("http://domis-c9-lubson.c9.io");
+       
+        public UcastnikRepository()
+        {
+            var url = ConfigurationManager.AppSettings["BayUrl"];
+            Client = new RestClient(url); //TODO Later introduce some solid dependency injection
+        }
 
-            var req = new RestRequest("ucastniks/{id}", Method.GET);
-            
+        public UcastnikRepository(IRestClient client)
+        {
+            Client = client;
+        }
+
+        public Ucastnik GetById(int id) 
+        {
+            var req = new RestRequest(Resource  + "/{id}", Method.GET);
             req.RequestFormat = DataFormat.Json;
             req.AddUrlSegment("id",id.ToString());
 
-       
-            var res = client.Execute<Ucastnik>(req);
+            var res = Client.Execute<Ucastnik>(req);
             
             return res.Data;
         }
 
-        public static List<Ucastnik> GetAll()
+        public List<Ucastnik> GetAll()
         {
 
-            var client = new RestClient("http://domis-c9-lubson.c9.io");
-
-            var req = new RestRequest("ucastniks", Method.GET);
-
+            var req = new RestRequest(Resource , Method.GET);
             req.RequestFormat = DataFormat.Json;
             
-            var res = client.Execute<List<Ucastnik>>(req);
+            var res = Client.Execute<List<Ucastnik>>(req);
       
             return res.Data;
         }
 
-        public static bool Add(Ucastnik ucastnik)
+        public bool Add(Ucastnik ucastnik)
         {
-         var client = new RestClient("http://domis-c9-lubson.c9.io");
-         var req = new RestRequest("ucastniks", Method.POST);
-         req.RequestFormat = DataFormat.Json;
-         
-         var u = new Ucastnik{Jmeno = "Lubson", Prijmeni = "Hupson", Narozen = DateTime.Now};
-         //req.AddParameter("commit", "Create Ucastnik");
-         req.AddObject(u, "Jmeno", "Prijmeni");
+         //var req = new RestRequest(Resource, Method.POST);
+         //req.RequestFormat = DataFormat.Json;
+    
+         //var customSerializer =  new Newtonsoft.Json.JsonSerializer
+         //   {
+         //       NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
+         //   };
 
-         var res = client.Execute(req);
-         return ("200" == res.StatusCode.ToString());
+            
+         ////req.JsonSerializer = (RestSharp.Serializers.ISerializer)customSerializer;
+         ////req.AddParameter("commit", "Create Ucastnik");
+         ////var ser = new RestSharp.Serializers.JsonSerializer() { RootElement="ucastnik"};
 
+         ////req.JsonSerializer = ser;
+         ////req.AddBody(ucastnik);
+         ////var json =Newtonsoft.Json.Converters
+
+         //var set = new JsonSerializerSettings()
+         //   {
+         //       NullValueHandling = NullValueHandling.Ignore,
+                
+         //   };
+
+         //var ser = JsonConvert.SerializeObject(ucastnik, set) ;
+
+    
+         ////req.RootElement = "ucastnik";
+         //req.AddObject(ucastnik);
+         //// req.AddParameter("commit", "Create Ucastnik");
+         //var res = Client.Execute(req);
+         //return ("200" == res.StatusCode.ToString());
+
+          HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://whales-on-rails-c9-lubson.c9.io/ucastniks"+".json");
+          req.ContentType = "application/json; charset=utf-8";
+          req.Method = "POST";
+          var set = new JsonSerializerSettings()
+             {
+                 NullValueHandling = NullValueHandling.Ignore,
+             };
+          var ser = JsonConvert.SerializeObject(ucastnik, set) ;
+          var sw = new StreamWriter(req.GetRequestStream());
+          sw.Write(ser);
+          sw.Flush();
+          sw.Close();
+
+
+
+          HttpWebResponse res = (HttpWebResponse)req.GetResponse();
+          return true;
         }
     }
 }
