@@ -51,7 +51,7 @@ namespace WindowsFormsApplication1
         private void button3_Click(object sender, EventArgs e)
         {
             Timer.Start();
-            Rep.Add(new Ucastnik()
+            var ucastnik = Rep.Add(new Ucastnik()
             {
                 Jmeno = "Lubomir", 
                 Prijmeni = "Hruban", 
