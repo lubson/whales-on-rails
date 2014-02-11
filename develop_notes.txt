@@ -1,0 +1,36 @@
+#dont forget tu put data to seed and push push push
+
+
+#running server
+rails s -b $IP -p $PORT
+
+#correct call from rails
+Parameters: {"utf8"=>"?", "authenticity_token"=>"msh8iHQOe1/KpRjXa9ePp+FtygNrvsKipchg+aic3kQ=", "ucastnik"=>{"jmeno"=>"kk", "prijmeni"=>"kkk", "narozen
+
+(1i)"=>"2014", "narozen(2i)"=>"2", "narozen(3i)"=>"8", "narozen(4i)"=>"22", "narozen(5i)"=>"40", "pohlavi"=>""}, "commit"=>"Create Ucastnik"}
+
+#What my app sending right now 11/02/2014
+ {"jmeno"=>"Lubomir", "prijmeni"=>"Hruban", "narozen"=>"2014-02-10T13:02:01.9209042+01:00", "pohlavi"=>1, "ucastnik"=>{"jmeno"=>"Lubomir", 
+
+"prijmeni"=>"Hruban", "narozen"=>"2014-02-10T13:02:01.9209042+01:00", "pohlavi"=>1}}
+
+#scaffold for Ucastnik
+rails generate scaffold Ucastnik jmeno:string{20} prijmeni:string{35} narozen:datetime pohlavi:integer
+
+#scaffold for ciselnik without note
+rails generate scaffold CNarodnost poradi:integer kod:string{6} nazev:string{30}
+
+#Add foreign key to Ucastnik with Reference for CNarodnost, then add has_many to CNarodnost, ale pak se musi opravit nazev na c_narodnost (_id se tam vzdy napoji)
+rails generate migration AddCNarodnostRefToUcastnik CNarodnost:references
+
+rails generate migration add_c_narodnost_id_to_ucastnik ucastnik:id  
+
+#How to drop migration which wasnt migrated yet.
+rails d migration SameMigrationNameAsUsedToGenerate
+
+#reset everything, it removed those extra indexes
+rake db:drop db:create db:migrate
+
+
+#zpet na migraci
+rake db:migrate:down VERSION=20140211161224
