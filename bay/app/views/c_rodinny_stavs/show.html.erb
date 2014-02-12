@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Poradi:</strong>
+  <%= @c_rodinny_stav.poradi %>
+</p>
+
+<p>
+  <strong>Kod:</strong>
+  <%= @c_rodinny_stav.kod %>
+</p>
+
+<p>
+  <strong>Nazev:</strong>
+  <%= @c_rodinny_stav.nazev %>
+</p>
+
+<%= link_to 'Edit', edit_c_rodinny_stav_path(@c_rodinny_stav) %> |
+<%= link_to 'Back', c_rodinny_stavs_path %>

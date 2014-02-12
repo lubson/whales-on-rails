@@ -1,4 +1,12 @@
 Bay::Application.routes.draw do
+  resources :c_vzdelanis
+
+  resources :c_povolanis
+
+  resources :c_rodinny_stavs
+
+  resources :c_tituls
+
   resources :c_narodnosts
 
   resources :ucastniks

@@ -1,0 +1,31 @@
+<h1>Listing c_tituls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Poradi</th>
+      <th>Kod</th>
+      <th>Nazev</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @c_tituls.each do |c_titul| %>
+      <tr>
+        <td><%= c_titul.poradi %></td>
+        <td><%= c_titul.kod %></td>
+        <td><%= c_titul.nazev %></td>
+        <td><%= link_to 'Show', c_titul %></td>
+        <td><%= link_to 'Edit', edit_c_titul_path(c_titul) %></td>
+        <td><%= link_to 'Destroy', c_titul, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New C titul', new_c_titul_path %>

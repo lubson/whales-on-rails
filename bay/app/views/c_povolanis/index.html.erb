@@ -1,0 +1,31 @@
+<h1>Listing c_povolanis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Poradi</th>
+      <th>Kod</th>
+      <th>Nazev</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @c_povolanis.each do |c_povolani| %>
+      <tr>
+        <td><%= c_povolani.poradi %></td>
+        <td><%= c_povolani.kod %></td>
+        <td><%= c_povolani.nazev %></td>
+        <td><%= link_to 'Show', c_povolani %></td>
+        <td><%= link_to 'Edit', edit_c_povolani_path(c_povolani) %></td>
+        <td><%= link_to 'Destroy', c_povolani, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New C povolani', new_c_povolani_path %>

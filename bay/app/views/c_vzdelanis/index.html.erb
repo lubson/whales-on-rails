@@ -1,0 +1,31 @@
+<h1>Listing c_vzdelanis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Poradi</th>
+      <th>Kod</th>
+      <th>Nazev</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @c_vzdelanis.each do |c_vzdelani| %>
+      <tr>
+        <td><%= c_vzdelani.poradi %></td>
+        <td><%= c_vzdelani.kod %></td>
+        <td><%= c_vzdelani.nazev %></td>
+        <td><%= link_to 'Show', c_vzdelani %></td>
+        <td><%= link_to 'Edit', edit_c_vzdelani_path(c_vzdelani) %></td>
+        <td><%= link_to 'Destroy', c_vzdelani, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New C vzdelani', new_c_vzdelani_path %>

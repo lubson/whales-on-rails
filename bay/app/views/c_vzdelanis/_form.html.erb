@@ -1,0 +1,29 @@
+<%= form_for(@c_vzdelani) do |f| %>
+  <% if @c_vzdelani.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@c_vzdelani.errors.count, "error") %> prohibited this c_vzdelani from being saved:</h2>
+
+      <ul>
+      <% @c_vzdelani.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :poradi %><br>
+    <%= f.number_field :poradi %>
+  </div>
+  <div class="field">
+    <%= f.label :kod %><br>
+    <%= f.text_field :kod %>
+  </div>
+  <div class="field">
+    <%= f.label :nazev %><br>
+    <%= f.text_field :nazev %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

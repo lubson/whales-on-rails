@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Poradi:</strong>
+  <%= @c_povolani.poradi %>
+</p>
+
+<p>
+  <strong>Kod:</strong>
+  <%= @c_povolani.kod %>
+</p>
+
+<p>
+  <strong>Nazev:</strong>
+  <%= @c_povolani.nazev %>
+</p>
+
+<%= link_to 'Edit', edit_c_povolani_path(@c_povolani) %> |
+<%= link_to 'Back', c_povolanis_path %>
