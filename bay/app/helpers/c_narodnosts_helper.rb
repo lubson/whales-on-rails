@@ -1,0 +1,2 @@
+module CNarodnostsHelper
+end

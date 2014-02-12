@@ -1,0 +1,31 @@
+<h1>Listing c_narodnosts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Poradi</th>
+      <th>Kod</th>
+      <th>Nazev</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @c_narodnosts.each do |c_narodnost| %>
+      <tr>
+        <td><%= c_narodnost.poradi %></td>
+        <td><%= c_narodnost.kod %></td>
+        <td><%= c_narodnost.nazev %></td>
+        <td><%= link_to 'Show', c_narodnost %></td>
+        <td><%= link_to 'Edit', edit_c_narodnost_path(c_narodnost) %></td>
+        <td><%= link_to 'Destroy', c_narodnost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New C narodnost', new_c_narodnost_path %>

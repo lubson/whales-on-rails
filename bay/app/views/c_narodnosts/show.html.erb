@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Poradi:</strong>
+  <%= @c_narodnost.poradi %>
+</p>
+
+<p>
+  <strong>Kod:</strong>
+  <%= @c_narodnost.kod %>
+</p>
+
+<p>
+  <strong>Nazev:</strong>
+  <%= @c_narodnost.nazev %>
+</p>
+
+<%= link_to 'Edit', edit_c_narodnost_path(@c_narodnost) %> |
+<%= link_to 'Back', c_narodnosts_path %>

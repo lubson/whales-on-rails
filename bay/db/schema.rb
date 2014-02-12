@@ -11,15 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209133026) do
+ActiveRecord::Schema.define(version: 20140211161224) do
+
+  create_table "c_narodnosts", force: true do |t|
+    t.integer  "poradi"
+    t.string   "kod",        limit: 6
+    t.string   "nazev",      limit: 30
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ucastniks", force: true do |t|
-    t.string   "jmeno",      limit: 20
-    t.string   "prijmeni",   limit: 35
+    t.string   "jmeno",          limit: 20
+    t.string   "prijmeni",       limit: 35
     t.datetime "narozen"
     t.integer  "pohlavi"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "c_narodnost_id"
   end
+
+  add_index "ucastniks", ["c_narodnost_id"], name: "index_ucastniks_on_c_narodnost_id"
 
 end
